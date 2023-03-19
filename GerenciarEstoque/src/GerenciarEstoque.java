@@ -17,6 +17,7 @@ public class GerenciarEstoque {
         System.out.println("    [  3.Saida Estoque      ]   ");
         System.out.println("    [  4.Listar Produtos    ]   ");
         System.out.println("    [  5.Patrimonio Liquido ]   ");
+        System.out.println("    [  6.Alterar Cadastro   ]   ");
         System.out.println("    [  9.Sair               ]   ");
         opcao = Integer.parseInt(ge.sc.nextLine());
         switch (opcao){
@@ -34,6 +35,9 @@ public class GerenciarEstoque {
                 break;
             case 5:
                 ge.execPatrimonioLiquido();
+                break;
+            case 6:
+                ge.execAlterarCadastro();
                 break;
             case 9:
                 System.out.println("Fim do Programa!!!");
@@ -120,5 +124,25 @@ public class GerenciarEstoque {
             patrimonio += total;
         }
         System.out.println("O Patrimonio total é R$" + patrimonio);
+    }
+    public void execAlterarCadastro(){
+        int codigo;
+        System.out.println("Digite código do produto Alterar o cadastro: ");
+        codigo = Integer.parseInt(sc.nextLine());
+        for(Produto produto: produtos){
+            if(produto.getCodigo() == codigo){
+                System.out.println("Digite novamente os dados do produto...");
+                System.out.println("Digite a Descrição do produto:");
+                produto.setDescricao(sc.nextLine());
+                System.out.println("Digite o custo do produto:");
+                produto.setCusto(Double.parseDouble(sc.nextLine()));
+                System.out.println("Digite a % de lucro do produto EX. 10%... :");
+                produto.setPreco(((Double.parseDouble(sc.nextLine())/100)* produto.getCusto()) + produto.getCusto());
+                System.out.println("Produto Alterado com sucesso!!!");
+                System.out.println(produto.toString());
+                return;
+            }
+
+        }System.out.println("Produto não encontrado!!!");
     }
 }
